@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 function App() {
   return (
     <>
-      <div className="font-josefin">
+      <div>
         <Home />
       </div>
     </>

@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -15,15 +15,19 @@ export default {
         "primary-light": "#E7E6EF",
         secondary: "#FB2E86",
       },
-      screens:{
-        sm:"576px", //landscape mode
-        md:"768px", //tablet
-        lg:"1024px", //laptop without numerical keyboard
-        xl:"1280px", // normal desktop
-        xxl:"1400px", //huge monitor
-      }
+      screens: {
+        sm: "576px", //landscape mode
+        md: "768px", //tablet
+        lg: "1024px", //laptop without numerical keyboard
+        xl: "1280px", // normal desktop
+        xxl: "1400px", //huge monitor
+      },
+      backgroundImage: {
+        "banner-1": "url('/assets/banner-1.png')",
+        "banner-2": "url('/assets/banner-2.png')",
+        "banner-3": "url('/assets/banner-3.png')",
+      },
     },
   },
   plugins: [],
 };
-

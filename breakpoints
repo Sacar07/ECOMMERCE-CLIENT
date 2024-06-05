@@ -1,0 +1,14 @@
+Available breakpoints
+Bootstrap includes six default breakpoints, sometimes referred to as grid tiers, for building responsively. These breakpoints can be customized if you’re using our source Sass files.
+
+
+4-8 point padding grid system 
+4 8 12 16 32 36 42 50 58 66
+
+Breakpoint	Class infix	Dimensions
+X-Small	None	<576px            84px  
+Small	sm	≥576px                100px  
+Medium	md	≥768px                120px  
+Large	lg	≥992px                146px  
+Extra large	xl	≥1200px           174px  
+Extra extra large	xxl	≥1400px   210px
