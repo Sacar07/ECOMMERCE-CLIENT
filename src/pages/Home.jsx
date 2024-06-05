@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { TbBackground } from "react-icons/tb";
+import TrendingProducts from "../components/home/FeaturedProducts";
 
 export default function Home() {
   const banners = [
@@ -33,9 +33,37 @@ export default function Home() {
       redirectUrl: "/products",
     },
   ];
+
+  const products = [
+    {
+      image: "/assets/chair-1.png",
+      name: "Cantilever chair",
+      code: "Code - Y523201",
+      price: "$42.00",
+    },
+    {
+      image: "/assets/chair-2.png",
+      name: "Swing chair",
+      code: "Code - Y523202",
+      price: "$50.00",
+    },
+    {
+      image: "/assets/chair-3.png",
+      name: "Hanging chair",
+      code: "Code - Y523203",
+      price: "$32.99",
+    },
+    {
+      image: "/assets/chair-4.png",
+      name: "Cante Chair",
+      code: "Code - Y523204",
+      price: "$44.50",
+    },
+  ];
+
   const settings = {
     dots: true,
-    arrows: true,
+    arrows: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -46,15 +74,27 @@ export default function Home() {
       <Header />
       <Slider {...settings}>
         {banners.map((el) => {
-          return (<Banner
-            background={el.background}
-            label={el.label}
-            heading={el.heading}
-            description={el.description}
-            redirectUrl={el.redirectUrl}
-          />)
+          return (
+            <Banner
+              background={el.background}
+              label={el.label}
+              heading={el.heading}
+              description={el.description}
+              redirectUrl={el.redirectUrl}
+            />
+          );
         })}
       </Slider>
+      <div className="container grid gap-[30px] py-[125px] sm:py-[140px] md:grid-cols-2 md:py-[158px] lg:grid-cols-4 lg:py-[178px] xl:py-[200px] xxl:py-[226px] ">
+        {products.map((el) => {
+          return <TrendingProducts
+          image= {el.image}
+          code= {el.code}
+          price = {el.price}
+          name = {el.name}
+          />;
+        })}
+      </div>
     </>
   );
 }
