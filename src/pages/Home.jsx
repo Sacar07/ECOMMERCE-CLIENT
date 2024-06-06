@@ -24,19 +24,21 @@ export default function Home() {
       .then((res) => {
         const data = res.data.data;
         //  console.log("data is", data);
-        setProduct(data);
+        setProduct(data || []);
         setIsloading(false);
-      });
+      })
+      .catch((err) => {});
 
     axios
       .get(
-        "https://ecommerce-sagartmg2.vercel.app/api/products?page=6&per_page=6",
+        "https://ecommerce-sagartmg2.vercel.app/api/products?page=15&per_page=6",
       )
       .then((res) => {
         // console.log("res is", res.data.products);
-        setLatestProducts(res.data.products);
+        setLatestProducts(res.data.products || []);
         setIsloading(false);
-      });
+      })
+      .catch((err) => {});
   }, []);
 
   // console.log("product is", product);
@@ -158,18 +160,12 @@ export default function Home() {
           );
         })}
       </Slider>
-      {isLoading && (
-        <div className="container grid grid-cols-4 gap-[30px] py-[125px] sm:py-[140px] md:grid-cols-2 md:py-[158px] lg:grid-cols-4 lg:py-[178px]  xl:py-[200px] xxl:py-[226px]">
-          <Skeleton className="h-[250px] w-[250px]" />
-          <Skeleton className="h-[250px] w-[250px]" />
-          <Skeleton className="h-[250px] w-[250px]" />
-          <Skeleton className="h-[250px] w-[250px]" />
-        </div>
-      )}
+
       <div className="container grid gap-[30px] py-[125px] sm:py-[140px] md:grid-cols-2 md:py-[158px] lg:grid-cols-4 lg:py-[178px] xl:py-[200px] xxl:py-[226px] ">
         {product.map((el) => {
           return (
             <FeaturedProducts
+              key={el._id}
               image={el.image}
               code={el.code}
               price={el.price}
@@ -177,6 +173,15 @@ export default function Home() {
             />
           );
         })}
+        {isLoading &&
+          [1, 2, 3, 4].map((el) => {
+            return <Skeleton className="h-[250px] w-[250px]" />;
+          })}
+        {!isLoading && product.length == 0 && (
+          <>
+            <p>Error fetching data...</p>
+          </>
+        )}
       </div>
       <div className="container">
         <p className="text-center font-josefin text-[30px] font-bold text-[#151875] sm:text-[42px]">
@@ -190,20 +195,11 @@ export default function Home() {
           <li>Special Offer</li>
         </ul>
 
-        {isLoading && (
-          <div className="grid  gap-[116px] pt-[58px] md:grid-cols-2 lg:grid-cols-3 ">
-            <Skeleton className="h-[301px] w-[340px]" />
-            <Skeleton className="h-[301px] w-[340px]"/>
-            <Skeleton className="h-[301px] w-[340px]"/>
-            <Skeleton className="h-[301px] w-[340px]"/>
-            <Skeleton className="h-[301px] w-[340px]"/>
-            <Skeleton className="h-[301px] w-[340px]"/>
-          </div>
-        )}
-        <div className="grid  gap-[116px] pt-[58px] md:grid-cols-2 lg:grid-cols-3 ">
+        <div className="container grid  gap-[116px] pt-[58px] md:grid-cols-2 lg:grid-cols-3 ">
           {latestProducts.map((el) => {
             return (
               <LatestProducts
+                key={el._id}
                 image={el.image}
                 name={el.name}
                 price={el.price}
@@ -211,6 +207,17 @@ export default function Home() {
               />
             );
           })}
+
+          {isLoading &&
+            [1, 2, 3, 4, 5, 6].map((el) => {
+              return <Skeleton className="h-[301px] w-[340px]" />;
+            })}
+
+          {!isLoading && latestProducts.length == 0 && (
+            <>
+              <p>Error fetching data</p>
+            </>
+          )}
         </div>
       </div>
     </>
