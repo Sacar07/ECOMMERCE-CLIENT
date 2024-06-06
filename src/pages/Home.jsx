@@ -14,6 +14,8 @@ import FeaturedProducts from "../components/home/FeaturedProducts";
 
 export default function Home() {
   const [product, setProduct] = useState([]);
+  const [latestProducts, setLatestProducts] = useState([]);
+
   const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
@@ -25,9 +27,19 @@ export default function Home() {
         setProduct(data);
         setIsloading(false);
       });
+
+    axios
+      .get(
+        "https://ecommerce-sagartmg2.vercel.app/api/products?page=6&per_page=6",
+      )
+      .then((res) => {
+        // console.log("res is", res.data.products);
+        setLatestProducts(res.data.products);
+        setIsloading(false);
+      });
   }, []);
 
-  console.log("product is", product);
+  // console.log("product is", product);
 
   const banners = [
     {
@@ -83,7 +95,7 @@ export default function Home() {
     },
   ];
 
-  const latestProducts = [
+  const latestProduct = [
     {
       image: "/assets/latest-1.png",
       name: "Comfort Handy Craft",
@@ -178,6 +190,16 @@ export default function Home() {
           <li>Special Offer</li>
         </ul>
 
+        {isLoading && (
+          <div className="grid  gap-[116px] pt-[58px] md:grid-cols-2 lg:grid-cols-3 ">
+            <Skeleton className="h-[301px] w-[340px]" />
+            <Skeleton className="h-[301px] w-[340px]"/>
+            <Skeleton className="h-[301px] w-[340px]"/>
+            <Skeleton className="h-[301px] w-[340px]"/>
+            <Skeleton className="h-[301px] w-[340px]"/>
+            <Skeleton className="h-[301px] w-[340px]"/>
+          </div>
+        )}
         <div className="grid  gap-[116px] pt-[58px] md:grid-cols-2 lg:grid-cols-3 ">
           {latestProducts.map((el) => {
             return (
@@ -185,7 +207,7 @@ export default function Home() {
                 image={el.image}
                 name={el.name}
                 price={el.price}
-                discountedPrice={el.discountedPrice}
+                discountedPrice={el.price}
               />
             );
           })}
