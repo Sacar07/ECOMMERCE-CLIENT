@@ -15,7 +15,7 @@ export default function FeaturedProducts(props) {
       </div>
       <img
         src={props.image}
-        className="mx-auto mb-[10px] mt-[32px] h-[178px] w-[178px]"
+        className="w-full object-cover mx-auto mb-[10px] mt-[32px] h-[150px] "
         alt="chair-1"
       />
       <div className="space-y-[12px] bg-white p-[15px] text-center transition-all group-hover:bg-[#2F1AC4] ">
@@ -28,7 +28,7 @@ export default function FeaturedProducts(props) {
           <div className="h-[4px] w-[14px] rounded bg-[#00009D]"></div>
         </div>
         <p className="font-josefin text-[14px] text-[#151875] group-hover:text-white">
-          {props.code}
+          Code - Y523201
         </p>
         <p className="font-lato text-[14px] text-[#151875] group-hover:text-white">
           {props.price}

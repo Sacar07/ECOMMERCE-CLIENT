@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "../components/home/Banner";
 import Header from "../components/Header";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TrendingProducts from "../components/home/FeaturedProducts";
+import LatestProducts from "../components/home/LatestProducts";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Home() {
+const [product, setProduct] = useState([]);
+
+useEffect(() => {
+ axios
+   .get("https://ecommerce-sagartmg2.vercel.app/api/products/trending")
+   .then((res) => {
+    
+     const data = res.data.data;
+    //  console.log("data is", data);
+     setProduct(data);
+   });
+}, [])
+
+console.log("product is",product);
+
+
+  
+
   const banners = [
     {
       background: "bg-banner-1",
@@ -61,6 +82,47 @@ export default function Home() {
     },
   ];
 
+  const latestProducts = [
+      {
+        image: "/assets/latest-1.png",
+        name: "Comfort Handy Craft",
+        price: "$65.00",
+        discountedPrice: "$42.00",
+      },
+      {
+        image: "/assets/latest-1.png",
+        name: "Comfort Handy",
+        price: "$65.00",
+        discountedPrice: "$42.00",
+      },
+      {
+        image: "/assets/latest-1.png",
+        name: "Handy Craft",
+        price: "$65.00",
+        discountedPrice: "$42.00",
+      },
+      {
+        image: "/assets/latest-6.png",
+        name: "Comfort Craft",
+        price: "$65.00",
+        discountedPrice: "$42.00",
+      },
+      {
+        image: "/assets/latest-5.png",
+        name: "Comfort Handy Craft",
+        price: "$65.00",
+        discountedPrice: "$42.00",
+      },
+      {
+        image: "/assets/latest-6.png",
+        name: "Comfort Handy",
+        price: "$65.00",
+        discountedPrice: "$42.00",
+      },
+    ];
+
+ 
+
   const settings = {
     dots: true,
     arrows: false,
@@ -86,7 +148,8 @@ export default function Home() {
         })}
       </Slider>
       <div className="container grid gap-[30px] py-[125px] sm:py-[140px] md:grid-cols-2 md:py-[158px] lg:grid-cols-4 lg:py-[178px] xl:py-[200px] xxl:py-[226px] ">
-        {products.map((el) => {
+        
+        {product.map((el) => {
           return (
             <TrendingProducts
               image={el.image}
@@ -97,7 +160,7 @@ export default function Home() {
           );
         })}
       </div>
-      <div className="container">
+         <div className="container">
         <p className="text-center font-josefin text-[30px] font-bold text-[#151875] sm:text-[42px]">
           Latest Products
         </p>
@@ -109,23 +172,10 @@ export default function Home() {
           <li>Special Offer</li>
         </ul>
 
-        <div className="pt-[58px]  grid md:grid-cols-2 lg:grid-cols-3 gap-[116px] ">
-          {[1, 2, 3, 4, 5, 6].map((el) => {
+        <div className="grid  gap-[116px] pt-[58px] md:grid-cols-2 lg:grid-cols-3 ">
+          {latestProducts.map((el) => {
             return (
-              <div className="h-[301px] w-[340px] bg-primary-light  shadow-[0px_0px_25px_0px_rgba(0,0,0,0.1)] sm:w-[360px]">
-                <img
-                  className="mx-auto mt-[33px]  "
-                  src="/assets/latest-1.png"
-                  alt=""
-                />
-                <div className="flex justify-between bg-white p-[8px] font-josefin text-[16px]">
-                  <p>Comfort Handy Craft</p>
-                  <div className="mr-[6px] flex gap-[10px] text-[14px]">
-                    <p>$42.00</p>
-                    <p className="text-secondary line-through">$65.00</p>
-                  </div>
-                </div>
-              </div>
+             <LatestProducts image={el.image} name={el.name} price={el.price} discountedPrice = {el.discountedPrice}/>
             );
           })}
         </div>
