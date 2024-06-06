@@ -1,6 +1,9 @@
 import React from "react";
 import { CiHeart, CiSearch, CiShoppingCart } from "react-icons/ci";
 
+import Skeleton from "react-loading-skeleton";
+
+
 export default function FeaturedProducts(props) {
   return (
     <div className="group relative bg-primary-light pt-[46px]  shadow-[0px_0px_25px_0px_rgba(0,0,0,0.1)] ">
@@ -15,7 +18,7 @@ export default function FeaturedProducts(props) {
       </div>
       <img
         src={props.image}
-        className="w-full object-cover mx-auto mb-[10px] mt-[32px] h-[150px] "
+        className="mx-auto mb-[10px] mt-[32px] h-[150px] w-full object-cover "
         alt="chair-1"
       />
       <div className="space-y-[12px] bg-white p-[15px] text-center transition-all group-hover:bg-[#2F1AC4] ">

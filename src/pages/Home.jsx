@@ -8,25 +8,26 @@ import TrendingProducts from "../components/home/FeaturedProducts";
 import LatestProducts from "../components/home/LatestProducts";
 import axios from "axios";
 import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import FeaturedProducts from "../components/home/FeaturedProducts";
 
 export default function Home() {
-const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [isLoading, setIsloading] = useState(true);
 
-useEffect(() => {
- axios
-   .get("https://ecommerce-sagartmg2.vercel.app/api/products/trending")
-   .then((res) => {
-    
-     const data = res.data.data;
-    //  console.log("data is", data);
-     setProduct(data);
-   });
-}, [])
+  useEffect(() => {
+    axios
+      .get("https://ecommerce-sagartmg2.vercel.app/api/products/trending")
+      .then((res) => {
+        const data = res.data.data;
+        //  console.log("data is", data);
+        setProduct(data);
+        setIsloading(false);
+      });
+  }, []);
 
-console.log("product is",product);
-
-
-  
+  console.log("product is", product);
 
   const banners = [
     {
@@ -83,45 +84,43 @@ console.log("product is",product);
   ];
 
   const latestProducts = [
-      {
-        image: "/assets/latest-1.png",
-        name: "Comfort Handy Craft",
-        price: "$65.00",
-        discountedPrice: "$42.00",
-      },
-      {
-        image: "/assets/latest-1.png",
-        name: "Comfort Handy",
-        price: "$65.00",
-        discountedPrice: "$42.00",
-      },
-      {
-        image: "/assets/latest-1.png",
-        name: "Handy Craft",
-        price: "$65.00",
-        discountedPrice: "$42.00",
-      },
-      {
-        image: "/assets/latest-6.png",
-        name: "Comfort Craft",
-        price: "$65.00",
-        discountedPrice: "$42.00",
-      },
-      {
-        image: "/assets/latest-5.png",
-        name: "Comfort Handy Craft",
-        price: "$65.00",
-        discountedPrice: "$42.00",
-      },
-      {
-        image: "/assets/latest-6.png",
-        name: "Comfort Handy",
-        price: "$65.00",
-        discountedPrice: "$42.00",
-      },
-    ];
-
- 
+    {
+      image: "/assets/latest-1.png",
+      name: "Comfort Handy Craft",
+      price: "$65.00",
+      discountedPrice: "$42.00",
+    },
+    {
+      image: "/assets/latest-1.png",
+      name: "Comfort Handy",
+      price: "$65.00",
+      discountedPrice: "$42.00",
+    },
+    {
+      image: "/assets/latest-1.png",
+      name: "Handy Craft",
+      price: "$65.00",
+      discountedPrice: "$42.00",
+    },
+    {
+      image: "/assets/latest-6.png",
+      name: "Comfort Craft",
+      price: "$65.00",
+      discountedPrice: "$42.00",
+    },
+    {
+      image: "/assets/latest-5.png",
+      name: "Comfort Handy Craft",
+      price: "$65.00",
+      discountedPrice: "$42.00",
+    },
+    {
+      image: "/assets/latest-6.png",
+      name: "Comfort Handy",
+      price: "$65.00",
+      discountedPrice: "$42.00",
+    },
+  ];
 
   const settings = {
     dots: true,
@@ -147,11 +146,18 @@ console.log("product is",product);
           );
         })}
       </Slider>
+      {isLoading && (
+        <div className="container grid grid-cols-4 gap-[30px] py-[125px] sm:py-[140px] md:grid-cols-2 md:py-[158px] lg:grid-cols-4 lg:py-[178px]  xl:py-[200px] xxl:py-[226px]">
+          <Skeleton className="h-[250px] w-[250px]" />
+          <Skeleton className="h-[250px] w-[250px]" />
+          <Skeleton className="h-[250px] w-[250px]" />
+          <Skeleton className="h-[250px] w-[250px]" />
+        </div>
+      )}
       <div className="container grid gap-[30px] py-[125px] sm:py-[140px] md:grid-cols-2 md:py-[158px] lg:grid-cols-4 lg:py-[178px] xl:py-[200px] xxl:py-[226px] ">
-        
         {product.map((el) => {
           return (
-            <TrendingProducts
+            <FeaturedProducts
               image={el.image}
               code={el.code}
               price={el.price}
@@ -160,7 +166,7 @@ console.log("product is",product);
           );
         })}
       </div>
-         <div className="container">
+      <div className="container">
         <p className="text-center font-josefin text-[30px] font-bold text-[#151875] sm:text-[42px]">
           Latest Products
         </p>
@@ -175,7 +181,12 @@ console.log("product is",product);
         <div className="grid  gap-[116px] pt-[58px] md:grid-cols-2 lg:grid-cols-3 ">
           {latestProducts.map((el) => {
             return (
-             <LatestProducts image={el.image} name={el.name} price={el.price} discountedPrice = {el.discountedPrice}/>
+              <LatestProducts
+                image={el.image}
+                name={el.name}
+                price={el.price}
+                discountedPrice={el.discountedPrice}
+              />
             );
           })}
         </div>
