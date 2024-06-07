@@ -9,6 +9,7 @@ import {
 import { FaSearch } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,7 +63,10 @@ export default function Header() {
             </div>
             <div className="flex justify-center gap-4">
               <p>
-                Login <CiUser className="inline-block" />
+                {" "}
+                <Link to="/login">
+                  Login <CiUser className="inline-block" />
+                </Link>
               </p>
               <span className="hidden sm:inline-block">
                 Wishlist
@@ -77,12 +81,12 @@ export default function Header() {
       </div>
       <nav className="container   w-full pb-[12px] pt-[18px] sm:flex sm:justify-between">
         <div className="flex w-full items-center justify-between md:gap-[90px] lg:w-auto">
-          <a
-            href=""
+          <Link
+            to="/"
             className="leading-auto font-josefin text-[34px] font-semibold text-primary-dark hover:text-secondary"
           >
             Hekto
-          </a>
+          </Link>
           <div
             className={`fixed bottom-0 right-0 top-0 z-20 w-[50%] bg-secondary leading-10  transition-all ${isMenuOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"} flex flex-col p-12 md:static md:z-0 md:w-auto md:flex-row md:gap-[35px] md:bg-transparent md:p-0`}
           >

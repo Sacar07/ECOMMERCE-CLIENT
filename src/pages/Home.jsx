@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import Banner from "../components/home/Banner";
-import Header from "../components/Header";
+import Header from "../components/common/Header";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import TrendingProducts from "../components/home/FeaturedProducts";
 import LatestProducts from "../components/home/LatestProducts";
 import axios from "axios";
 import { useState } from "react";
@@ -146,7 +145,6 @@ export default function Home() {
   };
   return (
     <>
-      <Header />
       <Slider {...settings}>
         {banners.map((el) => {
           return (
