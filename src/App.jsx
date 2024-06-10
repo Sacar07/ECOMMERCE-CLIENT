@@ -7,6 +7,9 @@ import {
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import RootComponent from "./components/common/RootComponent";
+import FeaturedProducts from "./components/home/TrendingProducts";
+import Products from "./pages/products/Products";
+import Slug from "./pages/products/Slug";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,19 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "products",
+        children: [
+          {
+            path: "",
+            element: <Products />,
+          },
+          {
+            path: ":slug",
+            element: <Slug />,
+          },
+        ],
       },
     ],
   },

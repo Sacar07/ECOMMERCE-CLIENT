@@ -1,13 +1,16 @@
 import React from "react";
 import { CiHeart, CiSearch, CiShoppingCart } from "react-icons/ci";
-
+import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 
+export default function TrendingProducts(props) {
+  const navigate = useNavigate();
 
-export default function FeaturedProducts(props) {
   return (
-    <div className="group relative bg-primary-light pt-[46px]  shadow-[0px_0px_25px_0px_rgba(0,0,0,0.1)] ">
-      <div className="absolute left-[11px] top-[11px] hidden h-[30px] w-[30px] items-center justify-center rounded-full bg-[#EEEFFB] transition-all group-hover:flex ">
+    <div onClick={() => {
+      navigate(`/products/${props._id}`)
+    }} className="hover:cursor-pointer group relative bg-primary-light pt-[46px]  shadow-[0px_0px_25px_0px_rgba(0,0,0,0.1)] ">
+      <div className="absolute left-[11px] top-[11px] hidden h-[30px] w-[30px] items-center justify-center rounded-full bg-[#EEEFFB] transition-all group-hover:flex">
         <CiShoppingCart className="text-[#00009D]" />
       </div>
       <div className="absolute left-[57px] top-[11px] hidden h-[30px] w-[30px] items-center justify-center transition-all group-hover:flex ">

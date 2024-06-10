@@ -9,10 +9,10 @@ import axios from "axios";
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import FeaturedProducts from "../components/home/FeaturedProducts";
+import TrendingProducts from "../components/home/TrendingProducts";
 
 export default function Home() {
-  const [product, setProduct] = useState([]);
+  const [trendingProducts, setTrendingProducts] = useState([]);
   const [latestProducts, setLatestProducts] = useState([]);
 
   const [isLoading, setIsloading] = useState(true);
@@ -23,14 +23,14 @@ export default function Home() {
       .then((res) => {
         const data = res.data.data;
         //  console.log("data is", data);
-        setProduct(data || []);
+        setTrendingProducts(data || []);
         setIsloading(false);
       })
       .catch((err) => {});
 
     axios
       .get(
-        "https://ecommerce-sagartmg2.vercel.app/api/products?page=15&per_page=6",
+        "https://ecommerce-sagartmg2.vercel.app/api/products?page=2&per_page=6",
       )
       .then((res) => {
         // console.log("res is", res.data.products);
@@ -160,10 +160,11 @@ export default function Home() {
       </Slider>
 
       <div className="container grid gap-[30px] py-[125px] sm:py-[140px] md:grid-cols-2 md:py-[158px] lg:grid-cols-4 lg:py-[178px] xl:py-[200px] xxl:py-[226px] ">
-        {product.map((el) => {
+        {trendingProducts.map((el) => {
           return (
-            <FeaturedProducts
+            <TrendingProducts
               key={el._id}
+              _id={el._id}
               image={el.image}
               code={el.code}
               price={el.price}
@@ -175,7 +176,7 @@ export default function Home() {
           [1, 2, 3, 4].map((el) => {
             return <Skeleton className="h-[250px] w-[250px]" />;
           })}
-        {!isLoading && product.length == 0 && (
+        {!isLoading && trendingProducts.length == 0 && (
           <>
             <p>Error fetching data...</p>
           </>

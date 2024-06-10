@@ -96,15 +96,15 @@ export default function Header() {
             >
               <IoClose />
             </button>
-            <a href="" className=" hover:text-primary">
+            <Link to="/" className=" hover:text-primary">
               Home
-            </a>
+            </Link>
             <a className=" hover:text-primary" href="">
               Pages
             </a>
-            <a className=" hover:text-primary" href="">
+            <Link to="/products" className=" hover:text-primary" href="">
               Products
-            </a>
+            </Link>
             <a className=" hover:text-primary" href="">
               Blog{" "}
             </a>
