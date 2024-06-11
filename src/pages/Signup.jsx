@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Signup() {
   return (
     <>
       <div className="h-[160px] w-full bg-[#F6F5FF]  pt-[54px] shadow-[0px_0px_25px_0px_rgba(0,0,0,0.1)]  sm:h-[180px] sm:pt-[61px]  md:h-[200px] md:pt-[69px] lg:h-[226px] lg:pt-[77px]  xl:h-[254px] xl:pt-[87px]  xxl:h-[286px] xxl:pt-[98px]">
@@ -18,10 +18,10 @@ export default function Login() {
       <div className="container mx-[auto] mt-[120px] h-[474+50px] w-[544px] border border-[#C2C5E1] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.1)]">
         <div className="p-[50px]">
           <p className="px-auto text-center font-josefin text-[32px] font-bold">
-            Login
+            Signup
           </p>
           <p className="text-center font-lato text-[16px] text-[#9096B2]">
-            Please login using account detail below.
+            Please signup using account detail below.
           </p>
           <input
             type="text"
@@ -33,14 +33,16 @@ export default function Login() {
             className=" mt-[23px] block h-[52px] w-[432px] rounded-[2px] border border-[#C2C5E1] pl-[13px]"
             type="text"
           />
-          <p className="mt-[13px] font-lato text-[17px] text-[#9096B2]">
-            Forgot your password?
-          </p>
+
           <button className="mt-[36px] h-[52px] w-[432px] rounded-[3px] bg-secondary font-bold text-white ">
-            Sign In
+            Sign Up
           </button>
           <p className="mt-[28px] text-center font-lato text-[17px] text-[#9096B2] ">
-            Don’t have an Account? <Link className="text-primary" to={"/signup"}> Create account</Link>
+            Already have an Account?{" "}
+            <Link className="text-primary" to={"/login"}>
+              {" "}
+              Login
+            </Link>
           </p>
         </div>
       </div>
