@@ -1,20 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Breadcrumb from "../components/common/Breadcrumb";
 
 export default function Signup() {
   return (
     <>
-      <div className="h-[160px] w-full bg-[#F6F5FF]  pt-[54px] shadow-[0px_0px_25px_0px_rgba(0,0,0,0.1)]  sm:h-[180px] sm:pt-[61px]  md:h-[200px] md:pt-[69px] lg:h-[226px] lg:pt-[77px]  xl:h-[254px] xl:pt-[87px]  xxl:h-[286px] xxl:pt-[98px]">
-        <div className="container">
-          <p className="font-josefin text-[36px] font-bold text-[#101750]">
-            My Account
-          </p>
-          <p className="font-lato">
-            Home . Pages .{" "}
-            <span className="text-[16px] text-secondary">My Account</span>
-          </p>
-        </div>
-      </div>
+      <Breadcrumb title="My Account" subtext="pages" />
       <div className="container mx-[auto] mt-[120px] h-[474+50px] w-[544px] border border-[#C2C5E1] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.1)]">
         <div className="p-[50px]">
           <p className="px-auto text-center font-josefin text-[32px] font-bold">

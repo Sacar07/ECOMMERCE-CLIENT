@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Breadcrumb from "../../components/common/Breadcrumb";
 
 export default function Slug() {
   const [product, setProduct] = useState({});
@@ -18,6 +19,7 @@ export default function Slug() {
 
   return (
     <div>
+      <Breadcrumb title="Product Details" subtext="pages"/>
       <h1>Slug</h1>
     </div>
   );
