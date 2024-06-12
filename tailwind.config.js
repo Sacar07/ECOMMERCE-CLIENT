@@ -14,6 +14,8 @@ export default {
         "primary-dark": "#0D0E43",
         "primary-light": "#E7E6EF",
         secondary: "#FB2E86",
+        "secondary-dark": "#b0205e",
+        "secondary-light": "#fd82b6",
       },
       screens: {
         sm: "576px", //landscape mode
