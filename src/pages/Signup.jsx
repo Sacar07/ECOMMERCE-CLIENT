@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Oval } from "react-loader-spinner";
 
 export default function Signup() {
+  const [formErrors, setFormErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   function handleSubmit(e) {
@@ -26,6 +27,9 @@ export default function Signup() {
       .catch((err) => {
         toast.error("bad request");
         setIsLoading(false);
+        const errors = err.response.data.errors;
+        setFormErrors(errors);
+        console.log("form err is", errors);
       });
   }
 
@@ -48,6 +52,13 @@ export default function Signup() {
                 placeholder="Name"
                 className="form-control mt-[37px] block"
               />
+
+              {formErrors.length !== 0 &&
+                formErrors.map((el) => {
+                  if (el.param == "name") {
+                    return <span className="text-red-500">{el.msg}</span>;
+                  }
+                })}
             </div>
             <div className="form-group">
               <input
@@ -56,6 +67,12 @@ export default function Signup() {
                 placeholder="Email Address"
                 className="form-control block"
               />
+              {formErrors.length !== 0 &&
+                formErrors.map((el) => {
+                  if (el.param == "email") {
+                    return <span className="text-red-500">{el.msg}</span>;
+                  }
+                })}
             </div>
             <div className="form-group">
               <input
@@ -64,6 +81,12 @@ export default function Signup() {
                 className="form-control block"
                 type="password"
               />
+              {formErrors.length !== 0 &&
+                formErrors.map((el) => {
+                  if (el.param == "password") {
+                    return <span className="text-red-500">{el.msg}</span>;
+                  }
+                })}
             </div>
             <div className="form-group">
               <select className="form-control" name="role" id="">
@@ -71,9 +94,19 @@ export default function Signup() {
                 <option value="seller">seller</option>
                 <option value="buyer">buyer</option>
               </select>
+              {formErrors.length !== 0 &&
+                formErrors.map((el) => {
+                  if (el.param == "role") {
+                    return <span className="text-red-500">{el.msg}</span>;
+                  }
+                })}
             </div>
 
-            <button disabled={isLoading} type="submit" className="btn mt-[36px] w-full">
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="btn mt-[36px] w-full"
+            >
               {isLoading ? (
                 <div className="flex justify-center">
                   <Oval
