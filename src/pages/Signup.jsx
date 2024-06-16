@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Oval } from "react-loader-spinner";
+import ErrorMessage from "../components/common/ErrorMessage";
 
 export default function Signup() {
   const [formErrors, setFormErrors] = useState([]);
@@ -28,8 +29,11 @@ export default function Signup() {
         toast.error("bad request");
         setIsLoading(false);
         const errors = err.response.data.errors;
-        setFormErrors(errors);
-        console.log("form err is", errors);
+        let errorObj = {};
+        errors.forEach((el) => {
+          errorObj[el.param] = el.msg;
+        });
+        setFormErrors(errorObj);
       });
   }
 
@@ -52,13 +56,7 @@ export default function Signup() {
                 placeholder="Name"
                 className="form-control mt-[37px] block"
               />
-
-              {formErrors.length !== 0 &&
-                formErrors.map((el) => {
-                  if (el.param == "name") {
-                    return <span className="text-red-500">{el.msg}</span>;
-                  }
-                })}
+              <ErrorMessage msg={formErrors.name} />
             </div>
             <div className="form-group">
               <input
@@ -67,12 +65,7 @@ export default function Signup() {
                 placeholder="Email Address"
                 className="form-control block"
               />
-              {formErrors.length !== 0 &&
-                formErrors.map((el) => {
-                  if (el.param == "email") {
-                    return <span className="text-red-500">{el.msg}</span>;
-                  }
-                })}
+              <ErrorMessage msg={formErrors.email} />
             </div>
             <div className="form-group">
               <input
@@ -81,12 +74,7 @@ export default function Signup() {
                 className="form-control block"
                 type="password"
               />
-              {formErrors.length !== 0 &&
-                formErrors.map((el) => {
-                  if (el.param == "password") {
-                    return <span className="text-red-500">{el.msg}</span>;
-                  }
-                })}
+              <ErrorMessage msg={formErrors.password} />
             </div>
             <div className="form-group">
               <select className="form-control" name="role" id="">
@@ -94,12 +82,7 @@ export default function Signup() {
                 <option value="seller">seller</option>
                 <option value="buyer">buyer</option>
               </select>
-              {formErrors.length !== 0 &&
-                formErrors.map((el) => {
-                  if (el.param == "role") {
-                    return <span className="text-red-500">{el.msg}</span>;
-                  }
-                })}
+              <ErrorMessage msg={formErrors.role} />
             </div>
 
             <button
