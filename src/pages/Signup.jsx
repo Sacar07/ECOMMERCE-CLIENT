@@ -16,7 +16,6 @@ export default function Signup() {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    setFormErrors({});
     axios
       .post("https://ecommerce-sagartmg2.vercel.app/api/users/signup", {
         name: e.target.name.value,
@@ -63,6 +62,7 @@ export default function Signup() {
                 type="text"
                 placeholder="Name"
                 className="form-control mt-[37px] block"
+                onChange={() => setFormErrors({ ...formErrors, name: "" })}
               />
               <ErrorMessage msg={formErrors.name} />
             </div>
@@ -72,14 +72,22 @@ export default function Signup() {
                 type="email"
                 placeholder="Email Address"
                 className="form-control block"
+                onChange={() => setFormErrors({ ...formErrors, email: "" })}
               />
               <ErrorMessage msg={formErrors.email} />
             </div>
 
-            <TogglePassword />
+            <TogglePassword
+              onChange={() => setFormErrors({ ...formErrors, password: "" })}
+            />
             <ErrorMessage msg={formErrors.password} />
             <div className="form-group">
-              <select className="form-control" name="role" id="">
+              <select
+                className="form-control"
+                name="role"
+                id=""
+                onChange={() => setFormErrors({ ...formErrors, role: "" })}
+              >
                 <option value="">-- select role --</option>
                 <option value="seller">seller</option>
                 <option value="buyer">buyer</option>
