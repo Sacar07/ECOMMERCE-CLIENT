@@ -1,9 +1,50 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Breadcrumb from "../components/common/Breadcrumb";
 import TogglePassword from "../components/common/TogglePassword";
+import { Oval } from "react-loader-spinner";
+import axios from "axios";
+import { toast } from "react-toastify";
+import ErrorMessage from "../components/common/ErrorMessage";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "b@b.com",
+    password: "password",
+  });
+  const [formErrors, setFormErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  function handleSubmit(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    axios
+      .post("https://ecommerce-sagartmg2.vercel.app/api/users/login", {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((res) => {
+        setIsLoading(false);
+        toast.success("Success");
+        // navigate("/");
+      })
+      .catch((err) => {
+        if (err.response?.status === 400) {
+          toast.error("bad request");
+          const errors = err.response.data.errors;
+          let errorObj = {};
+          errors.forEach((el) => {
+            errorObj[el.param] = el.msg;
+          });
+          setFormErrors(errorObj);
+        } else if (err.response?.status === 401) {
+          toast.error("invalid credentials");
+        } else {
+          toast.error("Something went wrong. Please Try Again Later");
+        }
+        setIsLoading(false);
+      });
+  }
   return (
     <>
       <Breadcrumb title="My Account" subtext="pages" />
@@ -15,25 +56,50 @@ export default function Login() {
           <p className="text-center font-lato text-[16px] text-[#9096B2]">
             Please login using account detail below.
           </p>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Email Address"
-              className="form-control mt-[37px] block"
-            />
-          </div>
-          <TogglePassword />
-          <p className="mt-[13px] font-lato text-[17px] text-[#9096B2]">
-            Forgot your password?
-          </p>
-          <button className="btn mt-[36px] w-full  ">Sign In</button>
-          <p className="mt-[28px] text-center font-lato text-[17px] text-[#9096B2] ">
-            Don’t have an Account?{" "}
-            <Link className="text-primary" to={"/signup"}>
-              {" "}
-              Create account
-            </Link>
-          </p>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <input
+                type="text"
+                name="email"
+                placeholder="Email Address"
+                className="form-control mt-[37px] block"
+              />
+              <ErrorMessage msg={formErrors.email} />
+            </div>
+            <TogglePassword />
+            <ErrorMessage msg={formErrors.password} />
+            <p className="mt-[13px] font-lato text-[17px] text-[#9096B2]">
+              Forgot your password?
+            </p>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="btn mt-[36px] w-full  "
+            >
+              {isLoading ? (
+                <div className="flex justify-center">
+                  <Oval
+                    visible={true}
+                    height="25"
+                    width="25"
+                    color="white"
+                    ariaLabel="oval-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                </div>
+              ) : (
+                "Sign In"
+              )}
+            </button>
+            <p className="mt-[28px] text-center font-lato text-[17px] text-[#9096B2] ">
+              Don’t have an Account?{" "}
+              <Link className="text-primary" to={"/signup"}>
+                {" "}
+                Create account
+              </Link>
+            </p>
+          </form>
         </div>
       </div>
       <img

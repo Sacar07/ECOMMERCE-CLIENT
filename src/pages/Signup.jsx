@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Breadcrumb from "../components/common/Breadcrumb";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {  toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 import ErrorMessage from "../components/common/ErrorMessage";
 import TogglePassword from "../components/common/TogglePassword";
 
 export default function Signup() {
-  const [formErrors, setFormErrors] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -24,9 +23,9 @@ export default function Signup() {
         role: e.target.role.value,
       })
       .then((res) => {
-        toast.success("success");
         setIsLoading(false);
         navigate("/login");
+        toast.success("Account created");
       })
       .catch((err) => {
         if (err.response?.status === 400) {
@@ -130,7 +129,7 @@ export default function Signup() {
         src="/assets/login-banner.png"
         alt=""
       />
-      <ToastContainer />
+     
     </>
   );
 }

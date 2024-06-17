@@ -11,6 +11,8 @@ import FeaturedProducts from "./components/home/TrendingProducts";
 import Products from "./pages/products/Products";
 import Slug from "./pages/products/Slug";
 import Signup from "./pages/Signup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +53,7 @@ function App() {
     <>
       <div className="font-lato">
         <RouterProvider router={router} />
+        <ToastContainer />
       </div>
     </>
   );
