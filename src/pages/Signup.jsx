@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Breadcrumb from "../components/common/Breadcrumb";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Oval } from "react-loader-spinner";
 import ErrorMessage from "../components/common/ErrorMessage";
+import TogglePassword from "../components/common/TogglePassword";
 
 export default function Signup() {
   const [formErrors, setFormErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
+    setFormErrors({});
     axios
       .post("https://ecommerce-sagartmg2.vercel.app/api/users/signup", {
         name: e.target.name.value,
@@ -24,16 +27,21 @@ export default function Signup() {
       .then((res) => {
         toast.success("success");
         setIsLoading(false);
+        navigate("/login");
       })
       .catch((err) => {
-        toast.error("bad request");
+        if (err.response?.status === 400) {
+          toast.error("bad request");
+          const errors = err.response.data.errors;
+          let errorObj = {};
+          errors.forEach((el) => {
+            errorObj[el.param] = el.msg;
+          });
+          setFormErrors(errorObj);
+        } else {
+          toast.error("Something went wrong. Please Try Again Later");
+        }
         setIsLoading(false);
-        const errors = err.response.data.errors;
-        let errorObj = {};
-        errors.forEach((el) => {
-          errorObj[el.param] = el.msg;
-        });
-        setFormErrors(errorObj);
       });
   }
 
@@ -67,15 +75,9 @@ export default function Signup() {
               />
               <ErrorMessage msg={formErrors.email} />
             </div>
-            <div className="form-group">
-              <input
-                name="password"
-                placeholder="Password"
-                className="form-control block"
-                type="password"
-              />
-              <ErrorMessage msg={formErrors.password} />
-            </div>
+
+            <TogglePassword />
+            <ErrorMessage msg={formErrors.password} />
             <div className="form-group">
               <select className="form-control" name="role" id="">
                 <option value="">-- select role --</option>

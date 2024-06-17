@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Breadcrumb from "../components/common/Breadcrumb";
+import TogglePassword from "../components/common/TogglePassword";
 
 export default function Login() {
   return (
@@ -21,13 +22,7 @@ export default function Login() {
               className="form-control mt-[37px] block"
             />
           </div>
-          <div className="form-group">
-            <input
-              placeholder="Password"
-              className=" form-control  block"
-              type="text"
-            />
-          </div>
+          <TogglePassword />
           <p className="mt-[13px] font-lato text-[17px] text-[#9096B2]">
             Forgot your password?
           </p>

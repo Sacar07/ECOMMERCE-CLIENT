@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
 
 export default function ErrorMessage(props) {
-  return (
-    <>
-      <span className="text-red-500">{props.msg}</span>
-    </>
-  );
+  if (props.msg) {
+    return <span className="text-red-500">{props.msg}</span>;
+  }
+  return null;
 }
