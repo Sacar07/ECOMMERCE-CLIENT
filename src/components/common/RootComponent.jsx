@@ -1,12 +1,12 @@
-import React from 'react'
-import Header from './Header';
-import { Outlet } from 'react-router-dom';
+import React from "react";
+import Header from "./Header";
+import { Outlet } from "react-router-dom";
 
-export default function RootComponent() {
+export default function RootComponent({ user, setUser }) {
   return (
     <>
-      <Header />
-      <Outlet/>
+      <Header user={user} setUser={setUser} />
+      <Outlet />
     </>
   );
 }

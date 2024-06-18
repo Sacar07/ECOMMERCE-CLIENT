@@ -11,7 +11,7 @@ import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ user, setUser }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -62,11 +62,21 @@ export default function Header() {
               </span>
             </div>
             <div className="flex justify-center gap-4">
+              <p> {user?.name}</p>
               <p>
-                {" "}
-                <Link to="/login">
-                  Login <CiUser className="inline-block" />
-                </Link>
+                {user ? (
+                  <span className="cursor-pointer"
+                    onClick={() => {
+                      setUser(null);
+                    }}
+                  >
+                    Logout <CiUser className="inline-block" />
+                  </span>
+                ) : (
+                  <Link to="/login">
+                    Login <CiUser className="inline-block" />
+                  </Link>
+                )}
               </p>
               <span className="hidden sm:inline-block">
                 Wishlist

@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import ErrorMessage from "../components/common/ErrorMessage";
 
-export default function Login() {
+export default function Login({ setUser }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "b@b.com",
@@ -26,6 +26,8 @@ export default function Login() {
       .then((res) => {
         setIsLoading(false);
         toast.success("Success");
+        // console.log("userrr", res.data.user);
+        setUser(res.data.user);
         // navigate("/");
       })
       .catch((err) => {
