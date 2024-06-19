@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
-import ErrorMessage from "./ErrorMessage";
 
 export default function TogglePassword(props) {
   const [togglePassword, setTogglePassword] = useState(false);
@@ -11,6 +10,7 @@ export default function TogglePassword(props) {
     <>
       <div className="form-group relative">
         <input
+          value={props.value}
           name="password"
           placeholder="Password"
           className="form-control block"

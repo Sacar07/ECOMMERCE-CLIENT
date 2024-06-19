@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import ErrorMessage from "../components/common/ErrorMessage";
 
-export default function Login({ setUser }) {
+export default function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "b@b.com",
@@ -27,7 +27,7 @@ export default function Login({ setUser }) {
         setIsLoading(false);
         toast.success("Success");
         // console.log("userrr", res.data.user);
-        setUser(res.data.user);
+        // setUser(res.data.user);
         // navigate("/");
       })
       .catch((err) => {
@@ -63,12 +63,13 @@ export default function Login({ setUser }) {
               <input
                 type="text"
                 name="email"
+                value={formData.email}
                 placeholder="Email Address"
                 className="form-control mt-[37px] block"
               />
               <ErrorMessage msg={formErrors.email} />
             </div>
-            <TogglePassword />
+            <TogglePassword value={formData.password} />
             <ErrorMessage msg={formErrors.password} />
             <p className="mt-[13px] font-lato text-[17px] text-[#9096B2]">
               Forgot your password?

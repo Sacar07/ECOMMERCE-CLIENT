@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Breadcrumb from "../components/common/Breadcrumb";
 import axios from "axios";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 import ErrorMessage from "../components/common/ErrorMessage";
 import TogglePassword from "../components/common/TogglePassword";
@@ -129,7 +129,6 @@ export default function Signup() {
         src="/assets/login-banner.png"
         alt=""
       />
-     
     </>
   );
 }
