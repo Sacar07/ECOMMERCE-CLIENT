@@ -12,7 +12,7 @@ import Slug from "./pages/products/Slug";
 import Signup from "./pages/Signup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import Cart from "./pages/Cart";
 
 function App() {
   const router = createBrowserRouter([
@@ -31,6 +31,10 @@ function App() {
         {
           path: "signup",
           element: <Signup />,
+        },
+        {
+          path: "cart",
+          element: <Cart />,
         },
         {
           path: "products",

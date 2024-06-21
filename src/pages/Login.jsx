@@ -31,7 +31,7 @@ export default function Login() {
         toast.success("Success");
         // console.log("userrr", res.data.user);
         dispatch(setUser(res.data.user));
-        // navigate("/");
+        navigate("/");
       })
       .catch((err) => {
         if (err.response?.status === 400) {

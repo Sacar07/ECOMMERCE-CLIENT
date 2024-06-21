@@ -12,10 +12,12 @@ import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setUser } from "../../redux/slice/userSlice";
+import { toast } from "react-toastify";
 
 export default function Header() {
   let user = useSelector((store) => store.user.value);
   let dispatch = useDispatch();
+  let cart = useSelector((store) => store.cart.value);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -73,6 +75,7 @@ export default function Header() {
                     className="cursor-pointer"
                     onClick={() => {
                       dispatch(setUser(null));
+                      toast.success("Logged out!");
                     }}
                   >
                     Logout <CiUser className="inline-block" />
@@ -87,9 +90,9 @@ export default function Header() {
                 Wishlist
                 <CiHeart className="inline-block" />
               </span>
-              <p>
-                <CiShoppingCart className="inline-block" />
-              </p>
+              <Link to="/cart">
+                <CiShoppingCart className="inline-block" /> ({cart.length})
+              </Link>
             </div>
           </div>
         </nav>
