@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    value: null,
+    value: null, //to simulate not logged in
   },
   reducers: {
     // increment: (state) => {
@@ -16,13 +16,13 @@ export const userSlice = createSlice({
     // decrement: (state) => {
     //   state.value -= 1;
     // },
-    setUser: (state, ) => {
-      state.value = {name:"ram from redux"};
+    setUser: (state, action) => {
+      state.value = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {setUser} = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

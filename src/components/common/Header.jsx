@@ -9,9 +9,13 @@ import {
 import { FaSearch } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setUser } from "../../redux/slice/userSlice";
 
-export default function Header({ user, setUser }) {
+export default function Header() {
+  let user = useSelector((store) => store.user.value);
+  let dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -65,9 +69,10 @@ export default function Header({ user, setUser }) {
               <p> {user?.name}</p>
               <p>
                 {user ? (
-                  <span className="cursor-pointer"
+                  <span
+                    className="cursor-pointer"
                     onClick={() => {
-                      setUser(null);
+                      dispatch(setUser(null));
                     }}
                   >
                     Logout <CiUser className="inline-block" />

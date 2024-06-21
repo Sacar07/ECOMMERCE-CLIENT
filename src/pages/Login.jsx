@@ -6,9 +6,12 @@ import { Oval } from "react-loader-spinner";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ErrorMessage from "../components/common/ErrorMessage";
+import { setUser } from "../redux/slice/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "b@b.com",
     password: "password",
@@ -27,7 +30,7 @@ export default function Login() {
         setIsLoading(false);
         toast.success("Success");
         // console.log("userrr", res.data.user);
-        // setUser(res.data.user);
+        dispatch(setUser(res.data.user));
         // navigate("/");
       })
       .catch((err) => {

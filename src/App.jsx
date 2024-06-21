@@ -15,11 +15,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 function App() {
-  const [user, setUser] = useState(null);
   const router = createBrowserRouter([
     {
       path: "",
-      element: <RootComponent user={user} setUser={setUser} />,
+      element: <RootComponent />,
       children: [
         {
           path: "",
@@ -27,7 +26,7 @@ function App() {
         },
         {
           path: "login",
-          element: <Login setUser={setUser} />,
+          element: <Login />,
         },
         {
           path: "signup",

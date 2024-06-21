@@ -2,10 +2,10 @@ import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
 
-export default function RootComponent({ user, setUser }) {
+export default function RootComponent() {
   return (
     <>
-      <Header user={user} setUser={setUser} />
+      <Header />
       <Outlet />
     </>
   );
