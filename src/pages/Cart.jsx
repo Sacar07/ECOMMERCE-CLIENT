@@ -5,19 +5,26 @@ import { clearCartItems } from "../redux/slice/cartSlice";
 export default function Cart() {
   const cart = useSelector((store) => store.cart.value);
   const dispatch = useDispatch();
-//   console.log("cart", cart);
+  //   console.log("cart", cart);
   return (
     <>
+      {/* {JSON.stringify(cart)} */}
       <div className="container">
         <p> List of cart items:</p>
         <ul>
           {cart?.map((el) => {
-            return <li>{el}</li>;
+            return <li>{JSON.stringify(el)}</li>;
           })}
         </ul>
-        <button onClick={() => {
-            dispatch(clearCartItems())
-        }} className="btn"> Clear all</button>
+        <button
+          onClick={() => {
+            dispatch(clearCartItems());
+          }}
+          className="btn"
+        >
+          {" "}
+          Clear all
+        </button>
       </div>
     </>
   );

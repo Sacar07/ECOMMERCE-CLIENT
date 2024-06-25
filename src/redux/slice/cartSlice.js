@@ -7,7 +7,16 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addCartItem: (state, action) => {
-      state.value.push(action.payload);
+      let product = action.payload;
+
+      let existingProduct = state.value.find((el) => el._id == product._id);
+      // console.log("exis prod", existingProduct);
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        state.value.push({ ...product, quantity: 1 });
+      }
     },
     clearCartItems: (state, action) => {
       state.value = [];

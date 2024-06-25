@@ -22,18 +22,19 @@ export default function Slug() {
   }, []);
 
   return (
-    <div>
+    <>
       <Breadcrumb title="Product Details" subtext="pages" />
-
-      {JSON.stringify(product)}
-      <button
-        onClick={() => {
-          dispatch(addCartItem(product.name));
-        }}
-        className="btn"
-      >
-        Add to cart
-      </button>
-    </div>
+      <div className="container space-y-5">
+        <div className="text-[42px]">{product.name}</div>
+        <button
+          onClick={() => {
+            dispatch(addCartItem(product));
+          }}
+          className="btn"
+        >
+          Add to cart 
+        </button>
+      </div>
+    </> 
   );
 }
