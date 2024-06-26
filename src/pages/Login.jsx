@@ -29,8 +29,9 @@ export default function Login() {
       .then((res) => {
         setIsLoading(false);
         toast.success("Success");
-        // console.log("userrr", res.data.user);
+        // console.log("userrr", res.data);
         dispatch(setUser(res.data.user));
+        localStorage.setItem("token", res.data.access_token);
         navigate("/");
       })
       .catch((err) => {

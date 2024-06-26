@@ -11,7 +11,7 @@ import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setUser } from "../../redux/slice/userSlice";
+import { logout, setUser } from "../../redux/slice/userSlice";
 import { toast } from "react-toastify";
 
 export default function Header() {
@@ -74,7 +74,7 @@ export default function Header() {
                   <span
                     className="cursor-pointer"
                     onClick={() => {
-                      dispatch(setUser(null));
+                      dispatch(logout());
                       toast.success("Logged out!");
                     }}
                   >

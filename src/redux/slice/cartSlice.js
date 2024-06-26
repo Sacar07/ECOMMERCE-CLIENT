@@ -10,7 +10,6 @@ export const cartSlice = createSlice({
       let product = action.payload;
 
       let existingProduct = state.value.find((el) => el._id == product._id);
-      // console.log("exis prod", existingProduct);
 
       if (existingProduct) {
         existingProduct.quantity += 1;

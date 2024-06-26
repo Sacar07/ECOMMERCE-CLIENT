@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { useDispatch } from "react-redux";
 import { addCartItem } from "../../redux/slice/cartSlice";
+import { toast } from "react-toastify";
 
 export default function TrendingProducts(props) {
   const navigate = useNavigate();
@@ -19,9 +20,10 @@ export default function TrendingProducts(props) {
       <div
         onClick={(e) => {
           e.stopPropagation(); //to avoid the Slug component to render which renders when its parents onclick is triggered
-          dispatch(addCartItem(props))
+          dispatch(addCartItem(props));
+          toast.success("Product added to the cart");
         }}
-        className="absolute left-[11px] top-[11px] hidden h-[30px] w-[30px] items-center justify-center rounded-full bg-[#EEEFFB] transition-all group-hover:flex"
+        className="absolute left-[11px] top-[11px] hidden h-[30px] w-[30px] items-center justify-center rounded-full bg-[#EEEFFB] transition-all hover:bg-secondary group-hover:flex"
       >
         <CiShoppingCart className="text-[#00009D]" />
       </div>

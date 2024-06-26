@@ -13,8 +13,16 @@ import Signup from "./pages/Signup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cart from "./pages/Cart";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "./redux/slice/userSlice";
+import { useEffect, useState } from "react";
+import { InfinitySpin } from "react-loader-spinner";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+
   const router = createBrowserRouter([
     {
       path: "",
@@ -52,12 +60,45 @@ function App() {
       ],
     },
   ]);
+  let token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .get("https://ecommerce-sagartmg2.vercel.app/api/users/get-user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          dispatch(setUser(res.data));
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
+
   return (
     <>
-      <div className="font-lato">
-        <RouterProvider router={router} />
-        <ToastContainer />
-      </div>
+      {isLoading ? (
+        <div className="flex h-screen items-center justify-center">
+          <InfinitySpin
+            visible={true}
+            width="200"
+            color="#7E33E0"
+            ariaLabel="infinity-spin-loading"
+          />
+        </div>
+      ) : (
+        <div className="font-lato">
+          <RouterProvider router={router} />
+          <ToastContainer />
+        </div>
+      )}
     </>
   );
 }
