@@ -123,9 +123,9 @@ export default function Header() {
             <Link to="/products" className=" hover:text-primary" href="">
               Products
             </Link>
-            <a className=" hover:text-primary" href="">
-              Blog{" "}
-            </a>
+            <Link className=" hover:text-primary" to="/seller/products">
+              seller-products{" "}
+            </Link>
             <a className=" hover:text-primary" href="">
               Shop
             </a>

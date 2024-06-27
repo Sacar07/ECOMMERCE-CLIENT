@@ -13,7 +13,7 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    email: "b@b.com",
+    email: "s@s.com",
     password: "password",
   });
   const [formErrors, setFormErrors] = useState({});

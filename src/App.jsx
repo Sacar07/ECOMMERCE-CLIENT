@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./redux/slice/userSlice";
 import { useEffect, useState } from "react";
 import { InfinitySpin } from "react-loader-spinner";
+import SellerProducts from "./pages/seller/Products";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -43,6 +44,16 @@ function App() {
         {
           path: "cart",
           element: <Cart />,
+        },
+        {
+          path: "seller",
+
+          children: [
+            {
+              path: "products",
+              element: <SellerProducts />,
+            },
+          ],
         },
         {
           path: "products",
