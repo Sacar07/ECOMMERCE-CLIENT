@@ -19,6 +19,7 @@ import { setUser } from "./redux/slice/userSlice";
 import { useEffect, useState } from "react";
 import { InfinitySpin } from "react-loader-spinner";
 import SellerProducts from "./pages/seller/Products";
+import AddProducts from "./pages/seller/AddProducts";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +52,21 @@ function App() {
           children: [
             {
               path: "products",
-              element: <SellerProducts />,
+              children: [
+                {
+                  path: "",
+                  element: <SellerProducts />,
+                },
+                {
+                  path: "add",
+                  element: <AddProducts />,
+                },
+              ],
+            },
+
+            {
+              path: ":slug",
+              element: <Slug />,
             },
           ],
         },
