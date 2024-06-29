@@ -39,7 +39,7 @@ export default function AddProducts() {
       .catch((err) => {
         console.log(err);
         if (err.response.status === 400) {
-          let errors = err.response.data.errors;
+          let errors = err.response.data.errors;s
           toast.error("Bad Request");
           let errObj = {};
           errors.forEach((el) => {
