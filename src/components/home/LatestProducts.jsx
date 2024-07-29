@@ -11,7 +11,7 @@ export default function LatestProducts(props) {
           alt=""
         />
         <img
-          className="mx-auto mb-[10px] mt-[33px] h-[217px] w-full object-cover   "
+          className="mx-auto mb-[10px] mt-[33px] h-[217px] w-full object-cover"
           src={props.image}
           alt="image load failed"
         />
