@@ -26,11 +26,22 @@ export const cartSlice = createSlice({
     setCartItem: (state, action) => {
       state.value = action.payload;
     },
+    decreaseCartItem: (state, action) => {
+      let product = action.payload;
+      let existingProduct = state.value.find((el) => el._id === product._id);
+      if (existingProduct) {
+        if (existingProduct.quantity > 1) {
+          existingProduct.quantity -= 1;
+        } else {
+          state.value = state.value.filter((el) => el._id !== product._id);
+        }
+      }
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setCartItem, addCartItem, clearCartItems, removeCartItem } =
+export const { decreaseCartItem,setCartItem, addCartItem, clearCartItems, removeCartItem } =
   cartSlice.actions;
 
 export default cartSlice.reducer;
