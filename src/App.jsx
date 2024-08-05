@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { InfinitySpin } from "react-loader-spinner";
 import SellerProducts from "./pages/seller/Products";
 import AddProducts from "./pages/seller/AddProducts";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -82,6 +83,10 @@ function App() {
               element: <Slug />,
             },
           ],
+        },
+        {
+          path: "*",
+          element: <PageNotFound />,
         },
       ],
     },

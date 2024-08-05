@@ -51,7 +51,10 @@ export default function Slug() {
             <IoStarSharp className="inline-block text-[#FFC416]" />
             <IoStarSharp className="inline-block text-[#FFC416]" />
             <IoStarSharp className="inline-block text-[#FFC416]" />(
-            {product?.reviews[0]?.rating})
+            {product.reviews && product.reviews[0]
+              ? product.reviews[0].rating
+              : "no reviews"}
+            )
           </div>
           <div>
             <span>${product.price}</span>
@@ -75,7 +78,12 @@ export default function Slug() {
           <button>
             <CiHeart className="ml-3 inline-block size-6" />
           </button>{" "}
-          <div className="font-bold  ">Categories: {product.categories[0]}</div>
+          <div className="font-bold  ">
+            Categories:
+            {product.categories && product.categories[0]
+              ? product.categories[0]
+              : "null"}
+          </div>
           <p className="font-bold  ">Tags</p>
           <div className="font-bold  ">
             Share
