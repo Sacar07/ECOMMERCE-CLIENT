@@ -8,6 +8,7 @@ import { IoStarSharp } from "react-icons/io5";
 import Products from "./Products";
 import { CiHeart } from "react-icons/ci";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function Slug() {
   const [product, setProduct] = useState({});
@@ -70,6 +71,7 @@ export default function Slug() {
           <button
             onClick={() => {
               dispatch(addCartItem(product));
+              toast.success("Product added to cart!");
             }}
             className="btn"
           >

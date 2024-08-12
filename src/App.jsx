@@ -5,7 +5,7 @@ import {
   Link,
 } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 import RootComponent from "./components/common/RootComponent";
 import Products from "./pages/products/Products";
 import Slug from "./pages/products/Slug";
@@ -16,11 +16,13 @@ import Cart from "./pages/Cart";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "./redux/slice/userSlice";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { InfinitySpin } from "react-loader-spinner";
 import SellerProducts from "./pages/seller/Products";
 import AddProducts from "./pages/seller/AddProducts";
 import PageNotFound from "./pages/PageNotFound";
+
+const Login = lazy(() => import("./pages/Login"));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +39,11 @@ function App() {
         },
         {
           path: "login",
-          element: <Login />,
+          element: (
+            <Suspense fallback={<p>loading</p>}>
+              <Login />
+            </Suspense>
+          ),
         },
         {
           path: "signup",
