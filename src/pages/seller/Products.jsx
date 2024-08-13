@@ -16,6 +16,12 @@ export default function SellerProducts() {
       })
       .catch((err) => {});
   }, []);
+  console.log(products.products);
+  return (
+    <>
+      {JSON.stringify(products.products[0].image)}
 
-  return <>{JSON.stringify(products)}</>;
+      <img src={products.products[0].image} alt="" />
+    </>
+  );
 }

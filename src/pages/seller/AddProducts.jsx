@@ -6,10 +6,18 @@ import { toast } from "react-toastify";
 import ErrorMessage from "../../components/common/ErrorMessage";
 
 export default function AddProducts() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    price: "",
+    image: null,
+  });
   const [formErrors, setFormErrors] = useState({});
   function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "image") {
+      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   }
 
   const [isLoading, setIsLoading] = useState(false);
@@ -24,10 +32,12 @@ export default function AddProducts() {
         {
           name: formData.name,
           price: formData.price,
+          image: formData.image,
         },
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         },
       )
@@ -39,7 +49,7 @@ export default function AddProducts() {
       .catch((err) => {
         console.log(err);
         if (err.response.status === 400) {
-          let errors = err.response.data.errors;s
+          let errors = err.response.data.errors;
           toast.error("Bad Request");
           let errObj = {};
           errors.forEach((el) => {
@@ -87,6 +97,17 @@ export default function AddProducts() {
                 className="form-control mt-[37px] block"
               />
               <ErrorMessage msg={formErrors.price} />
+            </div>
+            <div className="form-group">
+              <input
+                type="file"
+                name="image"
+                // value={formData.price}
+                onChange={handleChange}
+                placeholder="image"
+                className="form-control mt-[37px] block"
+              />
+              <ErrorMessage msg={formErrors.image} />
             </div>
 
             <button
